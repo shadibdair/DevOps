@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  mongodb:
+    container_name: mongodb
+    image: 'mongo:5.0'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - 27017:27017
+    volumes: # optional to preserve database after container is deleted.
+      - ./database-data:/data/db
+      - ./init.d/:/docker-entrypoint-initdb.d/mongo-init.js
+    networks:
+      - mongo
+
+  # Mongo Express Service
+  mongo-express:
+    image: 'mongo-express:0.54.0' 
+    container_name: mongo-express
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=ihavealongpassword
+    networks:
+      - mongo
+networks:
+  mongo: # docker-compose-files_mongo
+    driver: bridge
