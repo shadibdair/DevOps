@@ -1,0 +1,55 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: volume-snapshot-cronjob
+  namespace: shadi-namespace
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          # Root User Permission
+          securityContext:
+            runAsUser: 0
+            fsGroup: 0
+          # The service that binding the role
+          serviceAccountName: volumesnapshot-sa
+          containers:
+          - image: bitnami/kubectl:latest
+            command: ["/bin/sh","-c"]
+            args: ["cd /all/; kubectl create -f snapshot.yaml"]
+            imagePullPolicy: IfNotPresent
+            name: kubectl
+            volumeMounts:
+            - name: all
+              mountPath: /all
+          # Once init container complete, the Pod runs the app container from its spec section.
+          initContainers:
+          - image: bitnami/python:latest
+            command: ["/bin/sh","-c"]
+            args: ["cp /pyfolder/pyyaml.py /all/; cp /main/snapshot.yaml /all/; cd /all/; pip install pyyaml; sleep 5 && python3 pyyaml.py; echo done"]
+            imagePullPolicy: IfNotPresent
+            name: python
+            volumeMounts:
+            - name: vs-configmap
+              mountPath: /main
+            - name: python-cm
+              mountPath: /pyfolder
+            - name: all
+              mountPath: /all
+          restartPolicy: OnFailure
+          volumes:
+            - name: vs-configmap
+              configMap:
+                # Provide the name of the ConfigMap containing the files you wantto add to the container
+                name: vs-configmap
+            - name: python-cm
+              configMap:
+                name: python-configmap
+            - name: all
+              emptyDir: {}
+
+  # Run once a week at at 09:00 am clock on Sunday morning.
+  schedule: '0 9 * * 0'
+status: {}

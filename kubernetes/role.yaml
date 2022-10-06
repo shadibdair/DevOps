@@ -1,0 +1,15 @@
+---
+# A Role always sets permissions within a particular namespace
+# when create a Role, have to specify the namespace it belongs in.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: shadi-namespace
+  name: volumesnapshot-role
+# in the "specificNamespace" namespace that can be used to grant access
+# "create VolumeSnapshot" into the pods.
+rules:
+  # indicates the core API group.
+  - apiGroups: ["", "snapshot.storage.k8s.io"]
+    resources: [volumesnapshots, pods]
+    verbs: ["get", "list", "create", "patch", "update", "watch"]

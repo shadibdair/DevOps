@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vs-configmap
+  namespace: shadi-namespace
+data:
+  snapshot.yaml: |
+    # Create ConfigMap from a file, That specified on the CronJob
+    # kubectl create configmap vs-configmap --from-file=cm.yaml
+    apiVersion: snapshot.storage.k8s.io/v1
+    kind: VolumeSnapshot
+    metadata:
+      name: shadi-volumesnapshot
+    spec:
+      # A volume snapshot can request a particular class by specifying the name
+      # of a VolumeSnapshotClass using the attribute volumeSnapshotClassName
+      volumeSnapshotClassName: csi-aws-vsc
+      source:
+        # Is the name of the PersistentVolumeClaim data source for the snapshot
+        persistentVolumeClaimName: ebs-claim

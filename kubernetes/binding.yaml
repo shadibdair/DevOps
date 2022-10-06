@@ -1,0 +1,20 @@
+---
+# This role binding allows "service-account" to create
+# VolumeSnapshot in the "specificNamespace" namespace.
+# Need to already have a Role named "Role-NAME" in that namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: volumesnapshot-role-binding
+  namespace: shadi-namespace
+roleRef:
+  # "roleRef" specifies the binding to a Role.
+  apiGroup: rbac.authorization.k8s.io
+  # This must be Role or ClusterRole, In our case is Role.
+  kind: Role
+  # This must match the name of the Role that wish to bind to.
+  name: volumesnapshot-role
+subjects:
+  - kind: ServiceAccount
+    namespace: shadi-namespace
+    name: volumesnapshot-sa
