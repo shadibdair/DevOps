@@ -8,7 +8,7 @@ data:
   pyyaml.py: |
         # Imports
         import yaml
-        from datetime import date
+        from datetime import datetime
         # ----
 
         # Function replace the name of the VS
@@ -21,9 +21,9 @@ data:
 
         # Function set the currentDate
         def today():
-            today = date.today()
+            today = datetime.now()
             pod = "pod-vs-"
-            current_date = today.strftime("%m-%d-%Y")
+            current_date = today.strftime("%m-%d-%Y-%H%M%S")
             pod+=current_date
             return pod
 

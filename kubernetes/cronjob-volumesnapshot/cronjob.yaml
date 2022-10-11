@@ -52,4 +52,8 @@ spec:
 
   # Run once a week at at 09:00 am clock on Sunday morning.
   schedule: '0 9 * * 0'
+  # These fields specify how many completed and failed jobs should be kept.
+  # Once the pod success it will be deleted, to keep the list clean.
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 1
 status: {}
