@@ -17,6 +17,8 @@ The expander is configured using a single ConfigMap, which is watched by the exp
 ## Node Group
 ```
 A node group is one or more Amazon EC2 instances that are deployed in an Amazon EC2 Auto Scaling group.
-All instances in a node group must have the following characteristics: Be the same instance type.
-Be running the same Amazon Machine Image (AMI) Use the same Amazon EKS node IAM role.
+All instances in a node group must have the following characteristics: 
+ - Be the same instance type.
+ - Be running the same Amazon Machine Image (AMI)
+ - Use the same Amazon EKS node IAM role.
 ```
