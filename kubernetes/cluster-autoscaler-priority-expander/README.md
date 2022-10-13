@@ -10,3 +10,13 @@ This expander gives the user a lot of control over which scaling group specifica
 The expander is configured using a single ConfigMap, which is watched by the expander for any changes. The priority expander can be easily integrated with external optimization engines, that can just change the value of the ConfigMap configuration object. That way it's possible to dynamically change the decision of cluster-autoscaler using ConfigMap updates only.
 
 -----
+
+
+# 🌟 Some explanations
+
+## Node Group
+```
+A node group is one or more Amazon EC2 instances that are deployed in an Amazon EC2 Auto Scaling group.
+All instances in a node group must have the following characteristics: Be the same instance type.
+Be running the same Amazon Machine Image (AMI) Use the same Amazon EKS node IAM role.
+```
