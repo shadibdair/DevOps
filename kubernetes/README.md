@@ -3,5 +3,6 @@
 ### EKS - Managed K8S Service :
 ```
 - AWS manages Master Nodes for you.
-- 
+- Necessary apps pre-installed.
+- Scaling and backups.
 ```
