@@ -4,5 +4,7 @@
 ```
 - AWS manages Master Nodes for you.
 - Necessary apps pre-installed.
+   - Container Runtime.
+   - Master Processes.
 - Scaling and backups.
 ```
