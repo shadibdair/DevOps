@@ -154,8 +154,8 @@ spec:
             - --cloud-provider=aws
             - --skip-nodes-with-local-storage=false
             - --expander=priority
-            - --nodes=0:10:eks-nightly-devops-spot-ng20221020111441573600000001-1ac1fa8d-2165-b55a-656b-c6bfa4b02437
-            - --nodes=0:10:eks-nightly-devops-on-demand-ng20221020111441573800000003-22c1fa8d-2163-63bf-e24a-8fb59dd8604e
+            - --nodes=0:10:NAME-OF-THE-ASG
+            - --nodes=0:10:NAME-OF-THE-ASG
           volumeMounts:
             - name: ssl-certs
               mountPath: /etc/ssl/certs/ca-certificates.crt

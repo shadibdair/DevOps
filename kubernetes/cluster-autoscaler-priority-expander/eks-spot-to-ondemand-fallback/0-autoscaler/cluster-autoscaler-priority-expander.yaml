@@ -6,6 +6,6 @@ metadata:
 data:
   priorities: |-
     10: 
-      - eks-nightly-devops-on-demand-ng20221020111441573800000003-22c1fa8d-2163-63bf-e24a-8fb59dd8604e
+      - NAME-OF-THE-ASG
     20: 
-      - eks-nightly-devops-spot-ng20221020111441573600000001-1ac1fa8d-2165-b55a-656b-c6bfa4b02437
+      - NAME-OF-THE-ASG
