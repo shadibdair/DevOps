@@ -12,6 +12,9 @@ spec:
       labels:
         run: php-apache
     spec:
+    # To limit the pods when they scheduling to nodes ... to specify nodes.
+      nodeSelector:
+        specific-node: spot-nodes
       containers:
       - name: php-apache
         image: k8s.gcr.io/hpa-example
