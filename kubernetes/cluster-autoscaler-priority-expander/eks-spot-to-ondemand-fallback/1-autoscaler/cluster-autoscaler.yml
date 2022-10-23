@@ -154,8 +154,9 @@ spec:
             - --cloud-provider=aws
             - --skip-nodes-with-local-storage=false
             - --expander=priority
-            - --nodes=0:10:NAME-OF-THE-ASG
-            - --nodes=0:10:NAME-OF-THE-ASG
+            # NAME-OF-THE-ASG
+            - --nodes=0:10:*on-demand*
+            - --nodes=0:10:*spot-ng*
           volumeMounts:
             - name: ssl-certs
               mountPath: /etc/ssl/certs/ca-certificates.crt
