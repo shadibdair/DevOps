@@ -6,6 +6,9 @@ metadata:
 data:
   priorities: |-
     10: 
-      - NAME-OF-THE-ASG
+      - *on-demand*
     20: 
-      - NAME-OF-THE-ASG
+      - *spot-ng*
+
+# 10 -> NAME-OF-THE-ASG
+# 20 -> NAME-OF-THE-ASG
