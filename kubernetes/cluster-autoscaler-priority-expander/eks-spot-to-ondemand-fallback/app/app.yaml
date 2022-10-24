@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -12,16 +13,20 @@ spec:
       labels:
         run: php-apache
     spec:
-    # To limit the pods when they scheduling to nodes ... to specify nodes.
-      nodeSelector:
-        specific-node: spot-nodes
+      # nodeSelector:
+      #   specific-node: spot-nodes
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: apps-spots
+                operator: In
+                values:
+                - app-spot-worker-node
+                - app-ondemand-worker-node
       containers:
       - name: php-apache
         image: k8s.gcr.io/hpa-example
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            cpu: 1600m
-          requests:
-            cpu: 1000m
