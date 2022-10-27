@@ -1,0 +1,58 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          labels:
+            some-label: centos
+        spec:
+          containers:
+          - name: ubuntu
+            image: ubuntu
+            resources:
+              requests:
+                memory: 256Mi
+                cpu: 200m
+            command:
+            - cat
+            tty: true
+          - name: docker
+            image: docker:19.03.1
+            env:
+            - name: DOCKER_HOST
+              value: 0.0.0.0
+            command:
+            - sleep
+            args:
+            - 99d
+          - name: docker-test
+            image: docker:19.03.1-dind
+            securityContext:
+              privileged: true
+            tty: true
+        '''
+    }
+  }
+  stages {
+    stage('Build test ubuntu') {
+      steps {
+        // The name of the container
+        container('docker-test') {
+           script {
+                docker.withRegistry(
+                    // The ECR in DEV
+                    'https://1232132132132.dkr.ecr.us-east-1.amazonaws.com',
+                    // The Credential to Shadi user
+                    'ecr:us-east-1:ShadiUser') {
+                        // The name of docker && The name of the repository in aws ECR
+                        def myImage = docker.build('devops-test', './devops-test')
+                        myImage.push(params.version)
+                    }
+           }
+        }
+      }
+    }
+  }
+}
