@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-vol-pod
+spec:
+  containers:
+    - name: test
+      image: nginx
+      volumeMounts:
+      - name: pod-nginx-volume 
+        mountPath: "/mnt/ext"
+  volumes:
+    - name: pod-nginx-volume            # volume name the container can mount
+      persistentVolumeClaim: # Source of storage
+        claimName: pvclaim # name of pvc created
