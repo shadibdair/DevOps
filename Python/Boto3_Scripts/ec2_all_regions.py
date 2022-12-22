@@ -26,3 +26,27 @@ for i in regions:
 
 ##! This script get ec2's on all regions
 # * Author: Shadi Badir
+
+
+
+
+# ? OUTPUTS
+"""
+ap-south-1 	     0
+eu-north-1 	     5
+eu-west-3 	     0
+eu-west-2 	     9
+eu-west-1 	     1
+ap-northeast-3 	 0
+ap-northeast-2 	 2
+ap-northeast-1 	 30
+ca-central-1 	 0
+sa-east-1 	     0
+ap-southeast-1 	 0
+ap-southeast-2 	 0
+eu-central-1 	 0
+us-east-1 	     10
+us-east-2 	     31
+us-west-1 	     0
+us-west-2 	     1
+"""
